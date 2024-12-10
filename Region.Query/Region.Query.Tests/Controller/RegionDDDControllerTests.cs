@@ -47,7 +47,7 @@ public class RegionDDDControllerTests
     }
 
     [Fact]
-    public async Task RecoverAll_ReturnsNoContentResult_WhenNoDataExists()
+    public async Task RecoverAll_ReturnsOkResult_WhenNoDataExists()
     {
         // Arrange
         var mockUseCase = new Mock<IRecoverRegionDDDUseCase>();
@@ -122,7 +122,7 @@ public class RegionDDDControllerTests
     }
 
     [Fact]
-    public async Task RecoverByRegion_ReturnsNoContentResult_WhenNoDataExists()
+    public async Task RecoverByRegion_ReturnsOkResult_WhenNoDataExists()
     {
         // Arrange
         var mockUseCase = new Mock<IRecoverRegionDDDUseCase>();
@@ -162,6 +162,231 @@ public class RegionDDDControllerTests
         // Act
         var exception = await Assert.ThrowsAsync<UnauthorizedAccessException>(() =>
             controller.RecoverByRegion(region, mockUseCase.Object));
+
+        // Assert
+        Assert.Equal("Usuário sem permissão", exception.Message);
+    }
+
+    [Fact]
+    public async Task ThereIsDDDNumber_ReturnsOkResult_WhenDataExists()
+    {
+        // Arrange
+        var mockUseCase = new Mock<IRecoverRegionDDDUseCase>();
+
+        var region = 11;
+
+        var response = new Communication.Response.Result<ResponseThereIsDDDNumberJson>(
+            new ResponseThereIsDDDNumberJson(true), true, string.Empty);
+
+        mockUseCase.Setup(useCase => useCase.ThereIsDDDNumberAsync(region))
+                   .ReturnsAsync(response);
+
+        var controller = new RegionDDDController();
+
+        // Act
+        var result = await controller.ThereIsDDDNumber(region, mockUseCase.Object) as OkObjectResult;
+
+        // Assert
+        var actualResult = Assert.IsType<Communication.Response.Result<ResponseThereIsDDDNumberJson>>(result.Value);
+
+        Assert.NotNull(result);
+        Assert.True(actualResult.IsSuccess);
+        Assert.Equal(StatusCodes.Status200OK, result.StatusCode);
+    }
+
+    [Fact]
+    public async Task ThereIsDDDNumber_ReturnsOkResult_WhenNoDataExists()
+    {
+        // Arrange
+        var mockUseCase = new Mock<IRecoverRegionDDDUseCase>();
+
+        var region = 11;
+
+        var response = new Communication.Response.Result<ResponseThereIsDDDNumberJson>(
+            new ResponseThereIsDDDNumberJson(false), true, string.Empty);
+
+        mockUseCase.Setup(useCase => useCase.ThereIsDDDNumberAsync(region))
+                   .ReturnsAsync(response);
+
+        var controller = new RegionDDDController();
+
+        // Act
+        var result = await controller.ThereIsDDDNumber(region, mockUseCase.Object) as OkObjectResult;
+
+        // Assert
+        var actualResult = Assert.IsType<Communication.Response.Result<ResponseThereIsDDDNumberJson>>(result.Value);
+
+        Assert.NotNull(result);
+        Assert.True(actualResult.IsSuccess);
+        Assert.Equal(StatusCodes.Status200OK, result.StatusCode);
+    }
+
+    [Fact]
+    public async Task ThereIsDDDNumber_ReturnsUnauthorizedResult_WhenUserIsNotAuthorized()
+    {
+        // Arrange
+        var mockUseCase = new Mock<IRecoverRegionDDDUseCase>();
+
+        var region = 11;
+
+        mockUseCase.Setup(useCase => useCase.ThereIsDDDNumberAsync(region))
+                   .ThrowsAsync(new UnauthorizedAccessException("Usuário sem permissão"));
+
+        var controller = new RegionDDDController();
+
+        // Act
+        var exception = await Assert.ThrowsAsync<UnauthorizedAccessException>(() =>
+            controller.ThereIsDDDNumber(region, mockUseCase.Object));
+
+        // Assert
+        Assert.Equal("Usuário sem permissão", exception.Message);
+    }
+
+    [Fact]
+    public async Task RecoverById_ReturnsOkResult_WhenDataExists()
+    {
+        // Arrange
+        var mockUseCase = new Mock<IRecoverRegionDDDUseCase>();
+
+        var region = Guid.NewGuid();
+
+        var response = new Communication.Response.Result<ResponseRegionDDDJson>(
+            new ResponseRegionDDDJson(11, RegionRequestEnum.Sudeste.GetDescription()), true, string.Empty);
+
+        mockUseCase.Setup(useCase => useCase.RecoverByIdAsync(region))
+                   .ReturnsAsync(response);
+
+        var controller = new RegionDDDController();
+
+        // Act
+        var result = await controller.RecoverById(region, mockUseCase.Object) as OkObjectResult;
+
+        // Assert
+        var actualResult = Assert.IsType<Communication.Response.Result<ResponseRegionDDDJson>>(result.Value);
+
+        Assert.NotNull(result);
+        Assert.True(actualResult.IsSuccess);
+        Assert.Equal(StatusCodes.Status200OK, result.StatusCode);
+    }
+
+    [Fact]
+    public async Task RecoverById_ReturnsOkResult_WhenNoDataExists()
+    {
+        // Arrange
+        var mockUseCase = new Mock<IRecoverRegionDDDUseCase>();
+
+        var region = Guid.NewGuid();
+
+        var response = new Communication.Response.Result<ResponseRegionDDDJson>(
+            null, true, string.Empty);
+
+        mockUseCase.Setup(useCase => useCase.RecoverByIdAsync(region))
+                   .ReturnsAsync(response);
+
+        var controller = new RegionDDDController();
+
+        // Act
+        var result = await controller.RecoverById(region, mockUseCase.Object) as OkObjectResult;
+
+        // Assert
+        var actualResult = Assert.IsType<Communication.Response.Result<ResponseRegionDDDJson>>(result.Value);
+
+        Assert.NotNull(result);
+        Assert.True(actualResult.IsSuccess);
+        Assert.Equal(StatusCodes.Status200OK, result.StatusCode);
+    }
+
+    [Fact]
+    public async Task RecoverById_ReturnsUnauthorizedResult_WhenUserIsNotAuthorized()
+    {
+        // Arrange
+        var mockUseCase = new Mock<IRecoverRegionDDDUseCase>();
+
+        var region = Guid.NewGuid();
+
+        mockUseCase.Setup(useCase => useCase.RecoverByIdAsync(region))
+                   .ThrowsAsync(new UnauthorizedAccessException("Usuário sem permissão"));
+
+        var controller = new RegionDDDController();
+
+        // Act
+        var exception = await Assert.ThrowsAsync<UnauthorizedAccessException>(() =>
+            controller.RecoverById(region, mockUseCase.Object));
+
+        // Assert
+        Assert.Equal("Usuário sem permissão", exception.Message);
+    }
+
+    [Fact]
+    public async Task RecoverByDDD_ReturnsOkResult_WhenDataExists()
+    {
+        // Arrange
+        var mockUseCase = new Mock<IRecoverRegionDDDUseCase>();
+
+        var region = 11;
+
+        var response = new Communication.Response.Result<ResponseRegionDDDJson>(
+            new ResponseRegionDDDJson(11, RegionRequestEnum.Sudeste.GetDescription()), true, string.Empty);
+
+        mockUseCase.Setup(useCase => useCase.RecoverByDDDAsync(region))
+                   .ReturnsAsync(response);
+
+        var controller = new RegionDDDController();
+
+        // Act
+        var result = await controller.RecoverByDDD(region, mockUseCase.Object) as OkObjectResult;
+
+        // Assert
+        var actualResult = Assert.IsType<Communication.Response.Result<ResponseRegionDDDJson>>(result.Value);
+
+        Assert.NotNull(result);
+        Assert.True(actualResult.IsSuccess);
+        Assert.Equal(StatusCodes.Status200OK, result.StatusCode);
+    }
+
+    [Fact]
+    public async Task RecoverByDDD_ReturnsOkResult_WhenNoDataExists()
+    {
+        // Arrange
+        var mockUseCase = new Mock<IRecoverRegionDDDUseCase>();
+
+        var region = 11;
+
+        var response = new Communication.Response.Result<ResponseRegionDDDJson>(
+            null, true, string.Empty);
+
+        mockUseCase.Setup(useCase => useCase.RecoverByDDDAsync(region))
+                   .ReturnsAsync(response);
+
+        var controller = new RegionDDDController();
+
+        // Act
+        var result = await controller.RecoverByDDD(region, mockUseCase.Object) as OkObjectResult;
+
+        // Assert
+        var actualResult = Assert.IsType<Communication.Response.Result<ResponseRegionDDDJson>>(result.Value);
+
+        Assert.NotNull(result);
+        Assert.True(actualResult.IsSuccess);
+        Assert.Equal(StatusCodes.Status200OK, result.StatusCode);
+    }
+
+    [Fact]
+    public async Task RecoverByDDD_ReturnsUnauthorizedResult_WhenUserIsNotAuthorized()
+    {
+        // Arrange
+        var mockUseCase = new Mock<IRecoverRegionDDDUseCase>();
+
+        var region = 11;
+
+        mockUseCase.Setup(useCase => useCase.RecoverByDDDAsync(region))
+                   .ThrowsAsync(new UnauthorizedAccessException("Usuário sem permissão"));
+
+        var controller = new RegionDDDController();
+
+        // Act
+        var exception = await Assert.ThrowsAsync<UnauthorizedAccessException>(() =>
+            controller.RecoverByDDD(region, mockUseCase.Object));
 
         // Assert
         Assert.Equal("Usuário sem permissão", exception.Message);

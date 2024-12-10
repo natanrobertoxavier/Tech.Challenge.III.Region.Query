@@ -46,8 +46,8 @@ public class RegionDDDController : TechChallengeController
 
     [HttpGet]
     [Route("recover-by-id/{id}")]
-    [ProducesResponseType(typeof(Result<ResponseThereIsDDDNumberJson>), StatusCodes.Status200OK)]
-    public async Task<IActionResult> ThereIsDDDNumber(
+    [ProducesResponseType(typeof(Result<ResponseRegionDDDJson>), StatusCodes.Status200OK)]
+    public async Task<IActionResult> RecoverById(
         [FromRoute] Guid id,
         [FromServices] IRecoverRegionDDDUseCase useCase)
     {
@@ -58,7 +58,7 @@ public class RegionDDDController : TechChallengeController
 
     [HttpGet]
     [Route("recover-by-ddd/{ddd}")]
-    [ProducesResponseType(typeof(Result<ResponseThereIsDDDNumberJson>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(Result<ResponseRegionDDDJson>), StatusCodes.Status200OK)]
     public async Task<IActionResult> RecoverByDDD(
         [FromRoute] int ddd,
         [FromServices] IRecoverRegionDDDUseCase useCase)
