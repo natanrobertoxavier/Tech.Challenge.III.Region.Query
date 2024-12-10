@@ -12,7 +12,7 @@ public class RegionDDDController : TechChallengeController
 {
     [HttpGet]
     [ProducesResponseType(typeof(Result<IEnumerable<ResponseRegionDDDJson>>), StatusCodes.Status200OK)]
-    public async Task<IActionResult> RecoverAllAsync(
+    public async Task<IActionResult> RecoverAll(
         [FromServices] IRecoverRegionDDDUseCase useCase)
     {
         var result = await useCase.RecoverAllAsync();
@@ -23,7 +23,7 @@ public class RegionDDDController : TechChallengeController
     [HttpGet]
     [Route("DDD/by-region")]
     [ProducesResponseType(typeof(Result<IEnumerable<ResponseRegionDDDJson>>), StatusCodes.Status200OK)]
-    public async Task<IActionResult> RecoverByRegionAsync(
+    public async Task<IActionResult> RecoverByRegion(
         [FromQuery][Required] RegionRequestEnum region,
         [FromServices] IRecoverRegionDDDUseCase useCase)
     {
@@ -35,7 +35,7 @@ public class RegionDDDController : TechChallengeController
     [HttpGet]
     [Route("there-is-ddd/{dDD}")]
     [ProducesResponseType(typeof(Result<ResponseThereIsDDDNumberJson>), StatusCodes.Status200OK)]
-    public async Task<IActionResult> ThereIsDDDNumberAsync(
+    public async Task<IActionResult> ThereIsDDDNumber(
         [FromRoute] int dDD,
         [FromServices] IRecoverRegionDDDUseCase useCase)
     {
@@ -47,7 +47,7 @@ public class RegionDDDController : TechChallengeController
     [HttpGet]
     [Route("recover-by-id/{id}")]
     [ProducesResponseType(typeof(Result<ResponseThereIsDDDNumberJson>), StatusCodes.Status200OK)]
-    public async Task<IActionResult> ThereIsDDDNumberAsync(
+    public async Task<IActionResult> ThereIsDDDNumber(
         [FromRoute] Guid id,
         [FromServices] IRecoverRegionDDDUseCase useCase)
     {
@@ -59,7 +59,7 @@ public class RegionDDDController : TechChallengeController
     [HttpGet]
     [Route("recover-by-ddd/{ddd}")]
     [ProducesResponseType(typeof(Result<ResponseThereIsDDDNumberJson>), StatusCodes.Status200OK)]
-    public async Task<IActionResult> RecoverByDDDAsync(
+    public async Task<IActionResult> RecoverByDDD(
         [FromRoute] int ddd,
         [FromServices] IRecoverRegionDDDUseCase useCase)
     {
