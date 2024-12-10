@@ -11,32 +11,60 @@ namespace Region.Query.Api.Controllers.v1;
 public class RegionDDDController : TechChallengeController
 {
     [HttpGet]
-    [ProducesResponseType(typeof(IEnumerable<Result<ResponseRegionDDDJson>>), StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status204NoContent)]
-    public async Task<IActionResult> RecoverAll(
+    [ProducesResponseType(typeof(Result<IEnumerable<ResponseRegionDDDJson>>), StatusCodes.Status200OK)]
+    public async Task<IActionResult> RecoverAllAsync(
         [FromServices] IRecoverRegionDDDUseCase useCase)
     {
-        var result = await useCase.Execute();
+        var result = await useCase.RecoverAllAsync();
 
-        if (result.IsSuccess)
-            return Ok(result);
-
-        return NoContent();
+        return Ok(result);
     }
 
     [HttpGet]
     [Route("DDD/by-region")]
-    [ProducesResponseType(typeof(IEnumerable<ResponseRegionDDDJson>), StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status204NoContent)]
-    public async Task<IActionResult> RecoverByRegion(
+    [ProducesResponseType(typeof(Result<IEnumerable<ResponseRegionDDDJson>>), StatusCodes.Status200OK)]
+    public async Task<IActionResult> RecoverByRegionAsync(
         [FromQuery][Required] RegionRequestEnum region,
         [FromServices] IRecoverRegionDDDUseCase useCase)
     {
-        var result = await useCase.Execute(region);
+        var result = await useCase.RecoverListDDDByRegionAsync(region);
 
-        if (result.IsSuccess)
-            return Ok(result);
+        return Ok(result);
+    }
 
-        return NoContent();
+    [HttpGet]
+    [Route("there-is-ddd/{dDD}")]
+    [ProducesResponseType(typeof(Result<ResponseThereIsDDDNumberJson>), StatusCodes.Status200OK)]
+    public async Task<IActionResult> ThereIsDDDNumberAsync(
+        [FromRoute] int dDD,
+        [FromServices] IRecoverRegionDDDUseCase useCase)
+    {
+        var result = await useCase.ThereIsDDDNumberAsync(dDD);
+
+        return Ok(result);
+    }
+
+    [HttpGet]
+    [Route("recover-by-id/{id}")]
+    [ProducesResponseType(typeof(Result<ResponseThereIsDDDNumberJson>), StatusCodes.Status200OK)]
+    public async Task<IActionResult> ThereIsDDDNumberAsync(
+        [FromRoute] Guid id,
+        [FromServices] IRecoverRegionDDDUseCase useCase)
+    {
+        var result = await useCase.RecoverByIdAsync(id);
+
+        return Ok(result);
+    }
+
+    [HttpGet]
+    [Route("recover-by-ddd/{ddd}")]
+    [ProducesResponseType(typeof(Result<ResponseThereIsDDDNumberJson>), StatusCodes.Status200OK)]
+    public async Task<IActionResult> RecoverByDDDAsync(
+        [FromRoute] int ddd,
+        [FromServices] IRecoverRegionDDDUseCase useCase)
+    {
+        var result = await useCase.RecoverByDDDAsync(ddd);
+
+        return Ok(result);
     }
 }

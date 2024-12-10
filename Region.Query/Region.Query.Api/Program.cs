@@ -5,6 +5,7 @@ using Region.Query.Infrastructure;
 using Region.Query.Infrastructure.RepositoryAccess;
 using Region.Query.Domain.Extensions;
 using Region.Query.Infrastructure.Migrations;
+using Region.Query.Application.Services.Automapper;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -52,6 +53,11 @@ builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddApplication(builder.Configuration);
 
 builder.Services.AddMvc(options => options.Filters.Add(typeof(ExceptionFilters)));
+
+builder.Services.AddScoped(provider => new AutoMapper.MapperConfiguration(cfg =>
+{
+    cfg.AddProfile(new TechChallengeProfile());
+}).CreateMapper());
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
