@@ -30,9 +30,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Region.Query.Infrastructure
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Region.Query.Exceptions", "Region.Query.Exceptions\Region.Query.Exceptions.csproj", "{9BF549AD-CB39-45E8-9FBC-448CA0D81AD3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Region.Query.Tests", "Region.Query.Tests\Region.Query.Tests.csproj", "{76B1FC2E-297A-45A4-A77A-00616FF7EC1C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Region.Query.Tests", "Region.Query.Tests\Region.Query.Tests.csproj", "{76B1FC2E-297A-45A4-A77A-00616FF7EC1C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Region.Query.Integration.Tests", "Region.Query.Integration.Tests\Region.Query.Integration.Tests.csproj", "{63B4E5B0-68F8-4C38-8B24-37E14D4B4CC3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Region.Query.Integration.Tests", "Region.Query.Integration.Tests\Region.Query.Integration.Tests.csproj", "{63B4E5B0-68F8-4C38-8B24-37E14D4B4CC3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
