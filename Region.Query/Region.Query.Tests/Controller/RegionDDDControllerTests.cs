@@ -23,8 +23,8 @@ public class RegionDDDControllerTests
 
         var mockResponse = new ResponseListRegionDDDJson(new List<ResponseRegionDDDJson>
         {
-            new ResponseRegionDDDJson(11, RegionResponseEnum.Sudeste.GetDescription()),
-            new ResponseRegionDDDJson(21, RegionResponseEnum.Sudeste.GetDescription())
+            new ResponseRegionDDDJson(Guid.NewGuid(), 11, RegionResponseEnum.Sudeste.GetDescription()),
+            new ResponseRegionDDDJson(Guid.NewGuid(),21, RegionResponseEnum.Sudeste.GetDescription())
         });
 
         var response = new Communication.Response.Result<ResponseListRegionDDDJson>(
@@ -98,8 +98,8 @@ public class RegionDDDControllerTests
 
         var mockResponse = new ResponseListRegionDDDJson(new List<ResponseRegionDDDJson>
         {
-            new ResponseRegionDDDJson(11, RegionResponseEnum.Sudeste.GetDescription()),
-            new ResponseRegionDDDJson(21, RegionResponseEnum.Sudeste.GetDescription())
+            new ResponseRegionDDDJson(Guid.NewGuid(),11, RegionResponseEnum.Sudeste.GetDescription()),
+            new ResponseRegionDDDJson(Guid.NewGuid(), 21, RegionResponseEnum.Sudeste.GetDescription())
         });
 
         var response = new Communication.Response.Result<ResponseListRegionDDDJson>(
@@ -251,7 +251,7 @@ public class RegionDDDControllerTests
         var region = Guid.NewGuid();
 
         var response = new Communication.Response.Result<ResponseRegionDDDJson>(
-            new ResponseRegionDDDJson(11, RegionRequestEnum.Sudeste.GetDescription()), true, string.Empty);
+            new ResponseRegionDDDJson(Guid.NewGuid(), 11, RegionRequestEnum.Sudeste.GetDescription()), true, string.Empty);
 
         mockUseCase.Setup(useCase => useCase.RecoverByIdAsync(region))
                    .ReturnsAsync(response);
@@ -326,7 +326,7 @@ public class RegionDDDControllerTests
         var region = 11;
 
         var response = new Communication.Response.Result<ResponseRegionDDDJson>(
-            new ResponseRegionDDDJson(11, RegionRequestEnum.Sudeste.GetDescription()), true, string.Empty);
+            new ResponseRegionDDDJson(Guid.NewGuid(), 11, RegionRequestEnum.Sudeste.GetDescription()), true, string.Empty);
 
         mockUseCase.Setup(useCase => useCase.RecoverByDDDAsync(region))
                    .ReturnsAsync(response);

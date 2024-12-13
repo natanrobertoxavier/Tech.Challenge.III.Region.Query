@@ -37,8 +37,8 @@ public class RecoverRegionDDDUseCaseTests
 
         var mappedResult = new List<ResponseRegionDDDJson>
         {
-            new(11, RegionResponseEnum.Sudeste.GetDescription()),
-            new(14, RegionResponseEnum.Sudeste.GetDescription()),
+            new(Guid.NewGuid(), 11, RegionResponseEnum.Sudeste.GetDescription()),
+            new(Guid.NewGuid(), 14, RegionResponseEnum.Sudeste.GetDescription()),
         };
 
         _mockRepository
@@ -73,8 +73,8 @@ public class RecoverRegionDDDUseCaseTests
 
         var mappedResult = new List<ResponseRegionDDDJson>
         {
-            new(41, RegionResponseEnum.Sul.GetDescription()),
-            new(42, RegionResponseEnum.Sul.GetDescription()),
+            new(Guid.NewGuid(), 41, RegionResponseEnum.Sul.GetDescription()),
+            new(Guid.NewGuid(), 42, RegionResponseEnum.Sul.GetDescription()),
         };
 
         _mockRepository

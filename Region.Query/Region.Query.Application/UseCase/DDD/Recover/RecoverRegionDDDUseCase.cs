@@ -101,7 +101,7 @@ public class RecoverRegionDDDUseCase(
 
             _logger.Information($"End {nameof(RecoverByIdAsync)}.");
 
-            return output.Success(new ResponseRegionDDDJson(result.DDD, result.Region));
+            return output.Success(new ResponseRegionDDDJson(result.Id, result.DDD, result.Region));
         }
         catch (Exception ex)
         {
@@ -126,7 +126,7 @@ public class RecoverRegionDDDUseCase(
 
             _logger.Information($"End {nameof(RecoverByDDDAsync)}.");
 
-            return output.Success(new ResponseRegionDDDJson(result.DDD, result.Region));
+            return output.Success(new ResponseRegionDDDJson(result.Id, result.DDD, result.Region));
         }
         catch (Exception ex)
         {
