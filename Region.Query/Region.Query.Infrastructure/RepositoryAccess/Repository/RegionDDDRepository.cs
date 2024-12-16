@@ -19,9 +19,9 @@ public class RegionDDDRepository(
         await _context.DDDRegions.AnyAsync(c => c.DDD.Equals(ddd));
 
     public async Task<RegionDDD> RecoverByIdAsync(Guid id) =>
-        await _context.DDDRegions.Where(c => c.Id.Equals(id)).FirstOrDefaultAsync();
+        await _context.DDDRegions.AsNoTracking().Where(c => c.Id.Equals(id)).FirstOrDefaultAsync();
 
     public async Task<RegionDDD> RecoverByDDDAsync(int dDD) =>
-        await _context.DDDRegions.Where(c => c.DDD.Equals(dDD)).FirstOrDefaultAsync();
+        await _context.DDDRegions.AsNoTracking().Where(c => c.DDD.Equals(dDD)).FirstOrDefaultAsync();
 #pragma warning restore CS8603 // Possível retorno de referência nula.
 }
