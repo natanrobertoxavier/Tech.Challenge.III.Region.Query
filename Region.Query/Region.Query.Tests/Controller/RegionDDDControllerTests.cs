@@ -3,14 +3,10 @@ using Microsoft.AspNetCore.Mvc;
 using Moq;
 using Region.Query.Api.Controllers.v1;
 using Region.Query.Application.UseCase.DDD.Recover;
-using Region.Query.Application.UseCase.DDD;
 using Region.Query.Communication;
-using Region.Query.Communication.Request;
 using Region.Query.Communication.Request.Enum;
 using Region.Query.Communication.Response;
 using Region.Query.Communication.Response.Enum;
-using Region.Query.Exceptions.ExceptionBase;
-using Region.Query.Domain.ResultServices;
 
 namespace Region.Query.Tests.Controller;
 public class RegionDDDControllerTests

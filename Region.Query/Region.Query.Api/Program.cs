@@ -1,11 +1,11 @@
 using Region.Query.Api.Filters;
 using Region.Query.Application;
-using Region.Query.Communication;
-using Region.Query.Infrastructure;
-using Region.Query.Infrastructure.RepositoryAccess;
-using Region.Query.Domain.Extensions;
-using Region.Query.Infrastructure.Migrations;
 using Region.Query.Application.Services.Automapper;
+using Region.Query.Communication;
+using Region.Query.Domain.Extensions;
+using Region.Query.Infrastructure;
+using Region.Query.Infrastructure.Migrations;
+using Region.Query.Infrastructure.RepositoryAccess;
 
 var builder = WebApplication.CreateBuilder(args);
 

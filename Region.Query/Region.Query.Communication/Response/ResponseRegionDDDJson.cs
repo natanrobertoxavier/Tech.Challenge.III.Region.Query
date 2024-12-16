@@ -2,7 +2,7 @@
 
 public class ResponseRegionDDDJson(
     Guid id,
-    int dDD, 
+    int dDD,
     string region)
 {
     public Guid Id { get; set; } = id;

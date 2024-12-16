@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.Testing;
 using Newtonsoft.Json;
 using System.Text;
-using System.Text.Json;
-using Region.Query.Communication.Request;
 using TokenService.Manager.Controller;
 
 namespace Region.Query.Integration.Tests.Api;
